@@ -68,7 +68,8 @@ public class Card
 
 public bool IsTenCard
 {
-    get{
+    get
+    {
         return Value == CardValue.Ten
         || Value == CardValue.Jack
         || Value == CardValue.Queen
@@ -92,6 +93,63 @@ public class CardDeck
         get
         {
             return Cards.Count;
+        }
+    }
+}
+
+public class CardDeck
+{
+    public CardDeck()
+    {
+        List<Card> cards = new List<Card>();
+
+        foreach (CardSuit suit
+                  in (CardSuit[])Enum.GetValues(typeof(CardValue)))
+                  {
+                    foreach (CardValue value
+                             in (CardValue[])Enum.GetValues(typeof(CardValue)))
+                             {
+                                Card newCard = new Card()
+                                {
+                                    Suit = suit,
+                                    Value = value
+                                    ImageName = "card" + suit.GetDisplayName()
+                                                  + value.GetDisplayName()
+                                };
+                                cards.Add(newCard);
+                             }
+                  }
+    }
+}
+
+//Fisher-Yates shuffling algorithim in C#
+
+public class CardDeck
+{
+    public CardDeck()
+    {
+        //Convert new Stack<t> of card objects to an array
+        var array = card.ToArray();
+
+        Random rnd = new Random();
+
+        //Step 1: For each unshuffled item in the collection
+        for (int n = array.Count() -1; n > 0; --n)
+        {
+        // Step 2: randomly pick an element which has not been shuffled
+        int k = rnd.Next(n + 1);
+
+        //Step 3: Swap the seleceted element with the last unstruck element in the collection
+
+        Card temp = array[n];
+        array[n] = array[k];
+        array[k] = temp;
+        }
+
+        //step 4, insert the now-shuffled cards into the Cards property
+        for (int n = 0; n < array.Count(); n++)
+        {
+            Cards.Push(array[n]);
         }
     }
 }
